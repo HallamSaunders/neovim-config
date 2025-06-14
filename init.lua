@@ -32,19 +32,3 @@ vim.keymap.set('n', '<leader>w', ':w<CR>')
 
 -- Set log level
 vim.lsp.set_log_level("error")
-
--- LSP Configs
---local lspconfig = require('lspconfig')
---local util = require('lspconfig.util')
-
--- Python (Pyright) for website's Django backend
---lspconfig.pyright.setup {
---  cmd = { "pyright-langserver", "--stdio" },
---  root_dir = util.root_pattern("manage.py"),
---}
-
--- TypeScript/JavaScript (tsserver) for website frontend
---lspconfig.ts_ls.setup {
---  cmd = { "typescript-language-server", "--stdio" },
---  root_dir = util.root_pattern("package.json", "tsconfig.json"),
---}
