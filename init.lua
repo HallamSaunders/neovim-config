@@ -24,9 +24,6 @@ vim.opt.tabstop = 4             -- 1 tab == 4 spaces
 vim.opt.smartindent = true      -- autoindent new lines
 vim.opt.wrap = false            -- don't wrap long lines
 
--- Set a simple colorscheme (this uses a built-in one)
-vim.cmd('colorscheme desert')
-
 -- Keymap: save file with <leader>w
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 
