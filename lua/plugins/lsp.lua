@@ -8,13 +8,19 @@ return {
       -- Python (Pyright) for website's Django backend 
       lspconfig.pyright.setup {
         cmd = { "pyright-langserver", "--stdio" },
-        root_dir = util.root_pattern("manage.py"), 
+        root_dir = util.root_pattern("manage.py", "requirements.txt") or util.path.dirname,
       }
 
       -- TypeScript/JavaScript (tsserver) for website frontend
       lspconfig.ts_ls.setup {
         cmd = { "typescript-language-server", "--stdio" },
-        root_dir = util.root_pattern("package.json", "tsconfig.json"),
+        root_dir = util.root_pattern("package.json", "tsconfig.json") or util.path.dirname,
+      }
+      
+      -- Rust (rust_analyser)
+      lspconfig.rust_analyzer.setup {
+        cmd = { "rust-analyzer" },
+        root_dir = util.root_pattern("Cargo.toml") or util.path.dirname,
       }
 
       -- Show diagnostic in floating window with 250ms hold
