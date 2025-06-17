@@ -26,6 +26,7 @@ vim.opt.wrap = false            -- don't wrap long lines
 
 -- Keymap: save file with <leader>w
 vim.keymap.set('n', '<leader>w', ':w<CR>')
+vim.keymap.set('i', 'nm', '<Esc>', { desc = "nm to Escape" })
 
 -- Set log level
 vim.lsp.set_log_level("error")
