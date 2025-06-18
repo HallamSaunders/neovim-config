@@ -15,6 +15,7 @@ return {
           "marksman", -- Markdown
           "lua_ls", -- Lua 
           "bashls", -- Bash
+          "tailwindcss", -- Tailwind CSS
         },
       }
     end,
