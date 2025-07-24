@@ -1,3 +1,7 @@
+## Images
+![Neovim!](images/Neovim.png)
+![Neovim telescope!](images/Neovim\ Telescope.png)
+
 ## Plugin List
 1. Autopairs.
 2. Catpuccin colourscheme.
