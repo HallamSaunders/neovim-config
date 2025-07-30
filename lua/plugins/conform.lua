@@ -18,7 +18,7 @@ return {
         markdown = { "prettier" },
         yaml = { "prettier" },
         yml = { "prettier" },
-	python = { "black" },
+        python = { "black" },
       },
       formatters = {
         prettier = {
@@ -26,10 +26,10 @@ return {
           args = { "--stdin-filepath", "$FILENAME" },
           cws = vim.fn.getcwd() .. "/frontend",
         },
-	black = {
-	  command = "black",
-	  args = { "--quiet", "-" },
-	}
+        black = {
+          command = "black",
+          args = { "--quiet", "-" },
+        }
       },
     })
   end,

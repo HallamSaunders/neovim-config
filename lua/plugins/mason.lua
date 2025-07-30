@@ -9,16 +9,17 @@ return {
       require("mason").setup()
       require("mason-lspconfig").setup {
         ensure_installed = {
-          "pyright", -- Python
-          "ts_ls", -- TypeScript/JavaScript
-          "rust_analyzer", -- Rust 
-          "marksman", -- Markdown
-          "lua_ls", -- Lua 
-          "bashls", -- Bash
-          "tailwindcss", -- Tailwind CSS
+          "pyright",       -- Python
+          "ts_ls",         -- TypeScript/JavaScript
+          "rust_analyzer", -- Rust
+          "marksman",      -- Markdown
+          "lua_ls",        -- Lua
+          "bashls",        -- Bash
+          "tailwindcss",   -- Tailwind CSS
+          "yamlls",        -- YAML
+          "gopls",         -- Go
         },
       }
     end,
   },
 }
-
