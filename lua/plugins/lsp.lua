@@ -21,7 +21,22 @@ return {
       },
       bashls = {},
       yamlls = {},
-      gopls = {},
+      texlab = {
+        settings = {
+          texlab = {
+            build = {
+              executable = "latexmk",
+              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=%OUTDIR%", "%INPUT%" },
+              onSave = true,
+            },
+            forwardSearch = {
+              executable = "zathura",
+              args = { "--synctex-forward", "%l:1:%f", "%p" },
+            },
+            formatterLineLength = 100
+          }
+        }
+      }
     },
   },
   config = function(_, opts)
@@ -32,57 +47,19 @@ return {
       lspconfig[server].setup(config)
     end
 
+    -- Format on save
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      pattern = { "*.py", "*.js", "*.ts", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex" },
+      callback = function()
+        vim.lsp.buf.format({ async = true })
+      end,
+    })
+
     -- Show diagnostic in floating window with 250ms hold
     vim.o.updatetime = 250
     vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]]
 
     -- Keymaps
     vim.keymap.set('n', 'K', vim.diagnostic.open_float, { noremap = true, silent = true })
-
-
-    --      lspconfig.pyright.setup{
-    --  settings = {
-    --    python = {
-    --      pythonPath = vim.fn.getcwd() .. '/.venv/bin/python',
-    --    }
-    --  }
-    -- }
-
-    --lspconfig.ts_ls.setup{}
-
-    --lspconfig.rust_analyzer.setup {
-    --  root_dir = util.root_pattern("Cargo.toml") or util.path.dirname,
-    --}
-
-    --lspconfig.markdown.setup{
-    --  filetypes = { "markdown" },
-    --  root_dir = util.root_pattern(".git", "README.md", "index.md"),
-    --}
-
-    --lspconfig.lua_ls.setup{
-    --  settings = {
-    --    Lua = {
-    --      runtime = {
-    --        version = 'LuaJIT',
-    --      },
-    --      diagnostics = {
-    --        globals = { 'vim' },
-    --      },
-    --      workspace = {
-    --        library = vim.api.nvim_get_runtime_file("", true),
-    --        checkThirdParty = false,
-    --      },
-    --      telemetry = {
-    --        enable = false,
-    --      },
-    --    }
-    --  }
-    --}
-
-    --lspconfig.bashls.setup{
-    --  cmd = { "bash-language-server", "start" },
-    --  filetypes = { "sh", "bash" },
-    --  root_dir = util.root_pattern(".git", ".bashrc", ".bash_profile", ".profile"),
-    --}
   end,
 }

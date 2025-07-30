@@ -19,6 +19,7 @@ return {
         yaml = { "prettier" },
         yml = { "prettier" },
         python = { "black" },
+        tex = { "latexindent" },
       },
       formatters = {
         prettier = {
@@ -29,7 +30,12 @@ return {
         black = {
           command = "black",
           args = { "--quiet", "-" },
-        }
+        },
+        latexindent = {
+          command = "latexindent",
+          args = { "-l", "-m" },
+          stdin = false,
+        },
       },
     })
   end,
