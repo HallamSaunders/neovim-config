@@ -24,7 +24,12 @@ vim.opt.expandtab = true      -- use spaces instead of tabs
 vim.opt.shiftwidth = 2        -- shift 2 spaces when tab
 vim.opt.tabstop = 2           -- 1 tab == 2 spaces
 vim.opt.smartindent = true    -- autoindent new lines
-vim.opt.wrap = false          -- don't wrap long lines
+vim.opt.wrap = true           -- wrap long lines
+vim.opt.linebreak = true      -- wrap at word boundaries
+vim.opt.breakindent = true    -- indent wrapped lines
+vim.opt.scrolloff = 8         -- keep 8 lines above/below cursor
+vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
+
 
 -- Keymap: save file with <leader>w
 vim.keymap.set('n', '<leader>w', ':w<CR>')
