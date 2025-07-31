@@ -20,6 +20,7 @@ return {
         yml = { "prettier" },
         python = { "black" },
         tex = { "latexindent" },
+        go = { "gofmt" }
       },
       formatters = {
         prettier = {

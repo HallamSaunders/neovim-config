@@ -17,7 +17,7 @@ return {
           "bashls",        -- Bash
           "tailwindcss",   -- Tailwind CSS
           "yamlls",        -- YAML
-          --"gopls",         -- Go
+          "gopls",         -- Go
           "texlab",        -- LaTeX
           "html",          -- HTML
           "cssls",         -- CSS

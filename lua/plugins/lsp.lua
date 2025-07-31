@@ -21,6 +21,17 @@ return {
       },
       bashls = {},
       yamlls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+              shadow = true,
+            },
+            staticcheck = true,
+          },
+        },
+      },
       texlab = {
         settings = {
           texlab = {
@@ -48,7 +59,7 @@ return {
 
     -- Format on save
     vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { "*.py", "*.js", "*.ts", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex" },
+      pattern = { "*.py", "*.js", "*.ts", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.css", "*.json", "*.go" },
       callback = function()
         vim.lsp.buf.format({ async = true })
       end,
