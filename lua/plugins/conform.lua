@@ -5,7 +5,7 @@ return {
     require("conform").setup({
       format_on_save = {
         timeout_ms = 1000,
-        lsp_fallback = true,
+        lsp_fallback = false,
       },
       formatters_by_ft = {
         javascript = { "prettier" },
@@ -24,9 +24,8 @@ return {
       },
       formatters = {
         prettier = {
-          command = vim.fn.getcwd() .. "/frontend/node_modules/.bin/prettier",
-          args = { "--stdin-filepath", "$FILENAME" },
-          cws = vim.fn.getcwd() .. "/frontend",
+          command = "npm",
+          args = { "exec", "--", "prettier", "--stdin-filepath", "$FILENAME" },
         },
         black = {
           command = "black",
