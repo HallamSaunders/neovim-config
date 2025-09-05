@@ -1,13 +1,16 @@
 return {
   -- Completion engine
   { "hrsh7th/nvim-cmp" },
+
   -- Sources for nvim-cmp
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
+
   -- Snippet engine + snippet completion source
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" },
+
   -- Icons in completion menu
   { "onsails/lspkind-nvim" },
 

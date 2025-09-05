@@ -16,7 +16,7 @@ return {
       }
     })
 
-    -- Keymaps
+    -- Keybindings
     vim.keymap.set("n", "<leader>de", ":NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
 
     -- Disable side scrolling

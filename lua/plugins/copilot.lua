@@ -1,4 +1,3 @@
--- lua/plugins/copilot.lua
 return {
   "zbirenbaum/copilot.lua",
   config = function()
@@ -18,6 +17,10 @@ return {
         ["*"] = true,
       }
     })
+
+    -- Extra keybindings
+    vim.keymap.set("i", "<C-L>", function()
+      require("copilot.suggestion").accept_line()
+    end, { desc = "Copilot accept just one line" })
   end,
 }
-

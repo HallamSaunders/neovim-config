@@ -33,7 +33,7 @@ vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
 
 -- Keymap: save file with <leader>w
 vim.keymap.set('n', '<leader>w', ':w<CR>')
-vim.keymap.set('i', 'nml', '<Esc>', { desc = "nm to Escape" })
+vim.keymap.set('i', 'nml', '<Esc>', { desc = "nml to Escape" })
 
 -- Set log level
 vim.lsp.set_log_level("error")
