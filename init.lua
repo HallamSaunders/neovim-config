@@ -35,5 +35,5 @@ vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('i', 'nml', '<Esc>', { desc = "nml to Escape" })
 
--- Set log level
-vim.lsp.set_log_level("error")
+-- Set log level (commented out since deprecated)
+--vim.lsp.set_log_level("error")
