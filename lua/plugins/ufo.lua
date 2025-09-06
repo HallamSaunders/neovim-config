@@ -6,8 +6,8 @@ return {
   config = function()
     -- Set Neovim fold options
     vim.o.foldcolumn = "1" -- show fold column
-    vim.o.foldlevel = 0    -- keep folds closed by default
-    vim.o.foldlevelstart = 0
+    vim.o.foldlevel = 99   -- keep folds open by default
+    vim.o.foldlevelstart = 99
     vim.o.foldenable = true
 
     -- Setup ufo
