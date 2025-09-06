@@ -35,5 +35,9 @@ vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
 vim.keymap.set('n', '<leader>w', ':w<CR>')
 vim.keymap.set('i', 'nml', '<Esc>', { desc = "nml to Escape" })
 
+-- See function signature in insert mode with Ctrl-k
+vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+
+
 -- Set log level (commented out since deprecated)
 --vim.lsp.set_log_level("error")
