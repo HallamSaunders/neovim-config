@@ -28,6 +28,14 @@ return {
         comments = { "italic" },
         conditionals = { "italic" },
       },
+      custom_highlights = function(colors)
+        return {
+          NormalFloat = { bg = colors.base },                    -- popup background
+          FloatBorder = { fg = colors.surface2 },                -- border color
+          Pmenu = { bg = colors.mantle, fg = colors.text },      -- cmp menu
+          PmenuSel = { bg = colors.surface1, fg = colors.text }, -- selected item
+        }
+      end,
     })
     vim.cmd.colorscheme "catppuccin"
   end,

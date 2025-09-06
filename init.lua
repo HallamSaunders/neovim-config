@@ -18,6 +18,12 @@ require("lazy").setup("plugins", {
   concurrency = 5
 })
 
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    require("highlights").setup()
+  end,
+})
+
 vim.opt.number = true         -- show line numbers
 vim.opt.relativenumber = true -- show relative line numbers
 vim.opt.expandtab = true      -- use spaces instead of tabs
