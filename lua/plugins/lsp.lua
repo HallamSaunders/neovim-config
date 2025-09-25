@@ -50,16 +50,28 @@ return {
     },
   },
   config = function(_, opts)
-    local lspconfig = require('lspconfig')
-    local util = require('lspconfig.util')
-
-    for server, config in pairs(opts.servers) do
-      lspconfig[server].setup(config)
+    -- Register configs
+    local server_configs = {}
+    for server, server_opts in pairs(opts.servers) do
+      server_configs[server] = vim.lsp.config(server, server_opts)
     end
+
+    -- Autostart LSP when opening matching files
+    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+      callback = function(args)
+        local buffer = args.buf
+        local filetype = vim.bo[buffer].filetype
+        for _, config in pairs(server_configs) do
+          if config.filetypes == nil or vim.tbl_contains(config.filetypes, filetype) then
+            vim.lsp.start(config, { bufnr = buffer })
+          end
+        end
+      end,
+    })
 
     -- Format on save
     vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { "*.py", "*.js", "*.ts", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.css", "*.json", "*.go" },
+      pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.css", "*.json", "*.go" },
       callback = function()
         vim.lsp.buf.format({ async = true })
       end,
@@ -67,7 +79,11 @@ return {
 
     -- Show diagnostic in floating window with 250ms hold
     vim.o.updatetime = 250
-    vim.cmd [[autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })]]
+    vim.api.nvim_create_autocmd("CursorHold", {
+      callback = function()
+        vim.diagnostic.open_float(nil, { focusable = false })
+      end,
+    })
 
     -- Keymaps
     vim.keymap.set('n', 'K', vim.diagnostic.open_float, { noremap = true, silent = true })
