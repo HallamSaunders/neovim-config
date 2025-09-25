@@ -42,24 +42,24 @@ return {
 }
 
 --return {
---	"rebelot/kanagawa.nvim",
---	priority = 1000,
---	config = function()
---		require("kanagawa").setup({
---			theme = "wave", -- darkest variant
---			transparent = true, -- make background transparent
---			dimInactive = true, -- dim inactive window
+--  "rebelot/kanagawa.nvim",
+--  priority = 1000,
+--  config = function()
+--    require("kanagawa").setup({
+--      theme = "wave",     -- darkest variant
+--      transparent = true, -- make background transparent
+--      dimInactive = true, -- dim inactive window
 --
---			integrations = {
---				cmp = true,                              -- enable nvim-cmp
---				gitsigns = true,                         -- enable gitsigns
---				nvimtree = true,                         -- enable nvim-tree
---				telescope = true,                        -- enable telescope
---				treesitter = true,                       -- enable treesitter
---				which_key = true,                        -- enable which-key
---				indent_blankline = { enabled = true, colored_indent_levels = true }, -- enable indent-blankline#
---			}
---		})
---		vim.cmd("colorscheme kanagawa")
---	end,
+--      integrations = {
+--        cmp = true,                                                          -- enable nvim-cmp
+--        gitsigns = true,                                                     -- enable gitsigns
+--        nvimtree = true,                                                     -- enable nvim-tree
+--        telescope = true,                                                    -- enable telescope
+--        treesitter = true,                                                   -- enable treesitter
+--        which_key = true,                                                    -- enable which-key
+--        indent_blankline = { enabled = true, colored_indent_levels = true }, -- enable indent-blankline#
+--      }
+--    })
+--    vim.cmd("colorscheme kanagawa")
+--  end,
 --}
