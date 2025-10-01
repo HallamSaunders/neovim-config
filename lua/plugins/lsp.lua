@@ -71,7 +71,7 @@ return {
 
     -- Format on save
     vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.css", "*.json", "*.go" },
+      pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.json", "*.go" },
       callback = function()
         vim.lsp.buf.format({ async = true })
       end,
