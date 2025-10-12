@@ -24,6 +24,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
+-- Set GB English spell checking for .txt, .md, and .tex files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "txt", "md", "tex" },
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = "en_gb"
+  end,
+})
+
 vim.opt.number = true         -- show line numbers
 vim.opt.relativenumber = true -- show relative line numbers
 vim.opt.expandtab = true      -- use spaces instead of tabs
