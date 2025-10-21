@@ -53,6 +53,9 @@ vim.keymap.set('i', 'nml', '<Esc>', { desc = "nml to Escape" })
 -- See function signature in insert mode with Ctrl-k
 vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
 
+-- Hover to see documentation with K
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+
 
 -- Set log level (commented out since deprecated)
 --vim.lsp.set_log_level("error")
