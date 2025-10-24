@@ -6,7 +6,21 @@ return {
   },
   opts = {
     servers = {
-      pyright = {},
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              diagnosticMode = "openFilesOnly",
+              useLibraryCodeForTypes = true,
+              diagnosticSeverityOverride = {
+                reportUnreachableCode = "none",
+                reportUnreachable = "none",
+              }
+            }
+          }
+        }
+      },
       ts_ls = {},
       rust_analyzer = {},
       marksman = {},
