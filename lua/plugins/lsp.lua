@@ -22,7 +22,16 @@ return {
         }
       },
       ts_ls = {},
-      rust_analyzer = {},
+      rust_analyzer = {
+        settings = {
+          ["rust-analyzer"] = {
+            cargo = { allFeatures = true },
+            checkOnSave = {
+              command = "clippy",
+            },
+          },
+        },
+      },
       marksman = {},
       lua_ls = {
         settings = {
@@ -60,7 +69,8 @@ return {
             },
           }
         }
-      }
+      },
+      svelte = {},
     },
   },
   config = function(_, opts)

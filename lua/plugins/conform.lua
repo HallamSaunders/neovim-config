@@ -21,7 +21,9 @@ return {
         python = { "black" },
         tex = { "latexindent" },
         bib = { "latexindent" },
-        go = { "gofmt" }
+        go = { "gofmt" },
+        rust = { "rustfmt" },
+        svelte = { "prettier" },
       },
       formatters = {
         prettier = {
@@ -41,6 +43,14 @@ return {
           command = "latexindent",
           args = { "-l", "-m" },
           stdin = false,
+        },
+        gofmt = {
+          command = "gofmt",
+          args = {},
+        },
+        rustfmt = {
+          command = "rustfmt",
+          args = { "--emit=stdout" },
         },
       },
     })
