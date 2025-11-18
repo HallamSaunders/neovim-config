@@ -6,6 +6,7 @@ return {
       format_on_save = {
         timeout_ms = 5000,
         lsp_fallback = false,
+        lsp_format = "never",
       },
       formatters_by_ft = {
         javascript = { "prettier" },
@@ -51,6 +52,9 @@ return {
         rustfmt = {
           command = "rustfmt",
           args = { "--emit=stdout" },
+          stdin = true,
+          -- Don't pass filename or it will format twice
+          filename = false,
         },
       },
     })

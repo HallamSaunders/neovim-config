@@ -94,12 +94,12 @@ return {
     })
 
     -- Format on save
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.rs", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.json", "*.go" },
-      callback = function()
-        vim.lsp.buf.format({ async = true })
-      end,
-    })
+    --vim.api.nvim_create_autocmd("BufWritePre", {
+    --  pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.json", "*.go" },
+    --  callback = function()
+    --    vim.lsp.buf.format({ async = true })
+    --  end,
+    --})
 
     -- Show diagnostic in floating window with 250ms hold
     vim.o.updatetime = 250
