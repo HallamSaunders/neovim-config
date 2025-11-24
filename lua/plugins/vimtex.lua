@@ -7,8 +7,8 @@ return {
     vim.g.vimtex_compiler_latexmk = {
       options = {
         "-shell-escape",
-        --"-glossaries",
-      }
+        "-pdf",
+      },
     }
 
     vim.api.nvim_create_autocmd("FileType", {
