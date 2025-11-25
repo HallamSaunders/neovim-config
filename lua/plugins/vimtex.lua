@@ -10,12 +10,14 @@ return {
       },
     }
 
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "tex",
-      callback = function()
+    vim.g.vimtex_compiler_start_immediately = 1
+
+    --vim.api.nvim_create_autocmd("FileType", {
+    --  pattern = "tex",
+    --  callback = function()
         -- Start continuous compilation in the background
-        vim.cmd("VimtexCompile")
-      end,
-    })
+    --    vim.cmd("VimtexCompile")
+    --  end,
+    --})
   end,
 }
