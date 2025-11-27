@@ -12,12 +12,7 @@ return {
 
     vim.g.vimtex_compiler_start_immediately = 1
 
-    --vim.api.nvim_create_autocmd("FileType", {
-    --  pattern = "tex",
-    --  callback = function()
-        -- Start continuous compilation in the background
-    --    vim.cmd("VimtexCompile")
-    --  end,
-    --})
+    -- Keybindings
+    vim.keymap.set("n", "<leader>cv", "<cmd>VimtexCompile<CR>", { desc = "Vimtex Compile" })
   end,
 }
