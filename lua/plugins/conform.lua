@@ -43,7 +43,7 @@ return {
         latexindent = {
           command = "latexindent",
           args = { "-l", "-m" },
-          stdin = false,
+          stdin = true,
         },
         gofmt = {
           command = "gofmt",
@@ -58,5 +58,9 @@ return {
         },
       },
     })
+
+    vim.api.nvim_create_user_command("Format", function()
+      require("conform").format({ async = true })
+    end, { desc = "Format current buffer" })
   end,
 }
