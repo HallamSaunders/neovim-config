@@ -45,6 +45,11 @@ vim.opt.breakindent = true    -- indent wrapped lines
 vim.opt.scrolloff = 8         -- keep 8 lines above/below cursor
 vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
 
+vim.o.termguicolors = true -- enable 24-bit RGB colors
+vim.cmd([[
+  highlight Normal guibg=NONE guifg=NONE
+  highlight NonText guibg=NONE guifg=NONE
+]])
 
 -- Keymap: save file with <leader>w
 vim.keymap.set('n', '<leader>w', ':w<CR>')
