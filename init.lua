@@ -18,12 +18,6 @@ require("lazy").setup("plugins", {
   concurrency = 5
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    require("highlights").setup()
-  end,
-})
-
 -- Set GB English spell checking for .txt, .md, and .tex files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "txt", "md", "tex" },
