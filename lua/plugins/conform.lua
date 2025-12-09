@@ -51,10 +51,10 @@ return {
         },
         rustfmt = {
           command = "rustfmt",
-          args = { "--emit=stdout" },
-          stdin = true,
+          args = {},
+          --stdin = true,
           -- Don't pass filename or it will format twice
-          filename = false,
+          filename = true,
         },
       },
     })
