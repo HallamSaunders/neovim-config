@@ -15,6 +15,9 @@ return {
       panel = { enabled = true },
       filetypes = {
         ["*"] = true,
+        tex = false,
+        markdown = false,
+        plaintex = false,
       }
     })
 
