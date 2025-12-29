@@ -23,7 +23,7 @@ return {
         tex = { "latexindent" },
         bib = { "latexindent" },
         go = { "gofmt" },
-        rust = { "rustfmt" },
+        rust = { "cargo_fmt" },
         svelte = { "prettier" },
       },
       formatters = {
@@ -49,13 +49,18 @@ return {
           command = "gofmt",
           args = {},
         },
-        rustfmt = {
-          command = "rustfmt",
-          args = {},
-          --stdin = true,
-          -- Don't pass filename or it will format twice
-          filename = true,
+        cargo_fmt = {
+          command = "cargo",
+          args = { "fmt", "--quiet" },
+          stdin = false,
         },
+        --rustfmt = {
+        --  command = "rustfmt",
+        --  args = {},
+        --  --stdin = true,
+        --  -- Don't pass filename or it will format twice
+        --  filename = true,
+        --},
       },
     })
 
