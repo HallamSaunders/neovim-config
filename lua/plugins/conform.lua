@@ -50,9 +50,9 @@ return {
           args = {},
         },
         cargo_fmt = {
-          command = "cargo",
-          args = { "fmt", "--quiet" },
-          stdin = false,
+          command = "rustfmt",
+          args = { },
+          stdin = true,
         },
         --rustfmt = {
         --  command = "rustfmt",
