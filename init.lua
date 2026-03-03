@@ -55,6 +55,5 @@ vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature hel
 -- Hover to see documentation with K
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 
-
 -- Set log level (commented out since deprecated)
 --vim.lsp.set_log_level("error")
