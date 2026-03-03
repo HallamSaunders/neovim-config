@@ -25,6 +25,7 @@ return {
         go = { "gofmt" },
         rust = { "rustfmt" },
         svelte = { "prettier" },
+        c = { "clang-format" },
       },
       formatters = {
         prettier = {

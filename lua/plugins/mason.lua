@@ -22,6 +22,8 @@ return {
           "html",          -- HTML
           "cssls",         -- CSS
           "jsonls",        -- JSON
+          "svelte",        -- Svelte
+          "clangd",        -- C/C++
         },
       }
     end,
