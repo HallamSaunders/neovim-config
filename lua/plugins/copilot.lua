@@ -22,8 +22,12 @@ return {
     })
 
     -- Extra keybindings
-    vim.keymap.set("i", "<C-L>", function()
+    vim.keymap.set("i", "<C-f>", function()
       require("copilot.suggestion").accept_line()
     end, { desc = "Copilot accept just one line" })
+
+    vim.keymap.set("i", "<C-L>", function()
+      require("copilot.suggestion").accept_word()
+    end, { desc = "Copilot accept just the next word" })
   end,
 }
