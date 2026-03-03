@@ -7,6 +7,7 @@ return {
     vim.g.vimtex_compiler_latexmk = {
       out_dir = "build",
       options = {
+        "-lualatex",
         "-shell-escape",
         "-synctex=1",
         "-verbose",
