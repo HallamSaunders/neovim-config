@@ -1,20 +1,42 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    opts = {
-      ensure_installed = {
-        "python", "javascript", "typescript", "lua",
-        "html", "css", "json", "bash", "yaml",
-        "markdown", "markdown_inline",
-        "go", "rust",
-      },
-      highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = false,
-      },
-      indent = { enable = true },
-    },
-  },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		opts = {
+			ensure_installed = {
+				"python",
+				"javascript",
+				"typescript",
+				"lua",
+				"html",
+				"css",
+				"json",
+				"bash",
+				"yaml",
+				"markdown",
+				"markdown_inline",
+				"go",
+				"rust",
+				"java",
+				"c",
+				"cpp",
+				"tsx",
+				"jsx",
+				"vue",
+				"svelte",
+				"ruby",
+				"php",
+				"sql",
+				"dockerfile",
+				"make",
+				"cmake",
+				"dafny",
+			},
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+			indent = { enable = true },
+		},
+	},
 }
-
