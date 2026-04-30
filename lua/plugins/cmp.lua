@@ -51,10 +51,10 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "luasnip" },
-        }, {
-          { name = "buffer" },
+          { name = "nvim_lsp", priority = 1000 }, -- Give LSP top priority
+          { name = "luasnip",  priority = 750 },
+          { name = "buffer",   priority = 500 },
+          { name = "path",     priority = 250 },
         }),
         formatting = {
           format = lspkind.cmp_format({ with_text = true, maxwidth = 50 }),

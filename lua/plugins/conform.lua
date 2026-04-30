@@ -27,6 +27,8 @@ return {
         svelte = { "prettier" },
         c = { "lsp" },
         cpp = { "lsp" },
+        cs = { "csharpier" },
+
       },
       formatters = {
         prettier = {

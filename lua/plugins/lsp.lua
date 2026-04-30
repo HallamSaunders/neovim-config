@@ -6,6 +6,21 @@ return {
   },
   opts = {
     servers = {
+      omnisharp = {
+        settings = {
+          FormattingOptions = {
+            EnableEditorConfigSupport = true,
+            OrganizeImports = true,
+          },
+          RoslynExtensionsOptions = {
+            EnableAnalyzersSupport = true,
+            EnableImportCompletion = true,
+          },
+          Sdk = {
+            IncludePrereleases = true,
+          },
+        },
+      },
       pyright = {
         settings = {
           python = {
@@ -13,10 +28,6 @@ return {
               autoSearchPaths = true,
               diagnosticMode = "openFilesOnly",
               useLibraryCodeForTypes = true,
-              diagnosticSeverityOverride = {
-                reportUnreachableCode = "none",
-                reportUnreachable = "none",
-              }
             }
           }
         }
@@ -26,82 +37,36 @@ return {
         settings = {
           ["rust-analyzer"] = {
             cargo = { allFeatures = true },
-            check = {
-              command = "clippy"
-            },
+            check = { command = "clippy" },
           },
         },
       },
-      marksman = {},
       lua_ls = {
         settings = {
           Lua = {
-            diagnostics = {
-              globals = { 'vim' },
-            },
+            diagnostics = { globals = { 'vim' } },
           },
         },
       },
+      -- Rest of your servers...
+      marksman = {},
       bashls = {},
       yamlls = {},
-      gopls = {
-        settings = {
-          gopls = {
-            analyses = {
-              unusedparams = true,
-              shadow = true,
-            },
-            staticcheck = true,
-          },
-        },
-      },
-      texlab = {
-        settings = {
-          texlab = {
-            build = {
-              executable = "latexmk",
-              args = { "-pdf", "-interaction=nonstopmode", "-synctex=1", "-outdir=%OUTDIR%", "%INPUT%" },
-              onSave = true,
-            },
-            forwardSearch = {
-              executable = "zathura",
-              args = { "--synctex-forward", "%l:1:%f", "%p" },
-            },
-          }
-        }
-      },
+      gopls = {},
+      texlab = {},
       svelte = {},
     },
   },
   config = function(_, opts)
-    -- Register configs
-    local server_configs = {}
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
     for server, server_opts in pairs(opts.servers) do
-      server_configs[server] = vim.lsp.config(server, server_opts)
+      server_opts.capabilities = capabilities
+      vim.lsp.config[server] = server_opts
+      vim.lsp.enable(server)
     end
 
-    -- Autostart LSP when opening matching files
-    vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-      callback = function(args)
-        local buffer = args.buf
-        local filetype = vim.bo[buffer].filetype
-        for _, config in pairs(server_configs) do
-          if config.filetypes == nil or vim.tbl_contains(config.filetypes, filetype) then
-            vim.lsp.start(config, { bufnr = buffer })
-          end
-        end
-      end,
-    })
-
-    -- Format on save
-    --vim.api.nvim_create_autocmd("BufWritePre", {
-    --  pattern = { "*.py", "*.js", "*.ts", "*.tsx", "*.jsx", "*.md", "*.lua", "*.sh", "*.yaml", "*.tex", "*.yml", "*.html", "*.json", "*.go" },
-    --  callback = function()
-    --    vim.lsp.buf.format({ async = true })
-    --  end,
-    --})
-
-    -- Show diagnostic in floating window with 250ms hold
+    -- Show diagnostic in floating window
     vim.o.updatetime = 250
     vim.api.nvim_create_autocmd("CursorHold", {
       callback = function()
@@ -111,5 +76,6 @@ return {
 
     -- Keymaps
     vim.keymap.set('n', 'K', vim.diagnostic.open_float, { noremap = true, silent = true })
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { noremap = true, silent = true })
   end,
 }
