@@ -28,6 +28,8 @@ return {
         c = { "lsp" },
         cpp = { "lsp" },
         cs = { "csharpier" },
+        haskell = { "ormolu" },
+        cabal = { "cabalfmt" },
 
       },
       formatters = {
@@ -56,6 +58,11 @@ return {
         rustfmt = {
           command = "rustfmt",
         },
+        --ormolu = {
+        --  command = "ormolu",
+        --  args = { "--stdin-input-file", "$FILENAME" },
+        --  stdin = true,
+        --},
       },
     })
 
