@@ -48,6 +48,16 @@ return {
           },
         },
       },
+      hls = {
+        settings = {
+          haskell = {
+            checkProject = true,
+            formattingProvider = "ormolu",
+            cabalFormattingProvider = "cabalfmt",
+          },
+        },
+        cmd = { "haskell-language-server-wrapper", "--lsp" },
+      },
       -- Rest of your servers...
       marksman = {},
       bashls = {},
