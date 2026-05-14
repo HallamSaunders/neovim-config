@@ -4,7 +4,7 @@ return {
     require("copilot").setup({
       suggestion = {
         enabled = true,
-        auto_trigger = true,
+        auto_trigger = false,
         keymap = {
           accept = "<C-J>",
           next = "<C-]>",
@@ -15,13 +15,19 @@ return {
       panel = { enabled = true },
       filetypes = {
         ["*"] = true,
-        --tex = false,
-        markdown = false,
-        plaintex = false,
       }
     })
 
     -- Extra keybindings
+    vim.keymap.set("i", "<C-S>", function()
+      local suggestion = require("copilot.suggestion")
+      if suggestion.is_visible() then
+        suggestion.dismiss()
+      else
+        suggestion.next()
+      end
+    end, { desc = "Manual Copilot trigger" })
+
     vim.keymap.set("i", "<C-f>", function()
       require("copilot.suggestion").accept_line()
     end, { desc = "Copilot accept just one line" })
