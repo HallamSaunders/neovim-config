@@ -2,37 +2,84 @@ return {
   -- ======================================================================== --
   -- COLOURSCHEME (Catppuccin)                                                --
   -- ======================================================================== --
+  --{
+  --  "catppuccin/nvim",
+  --  name = "catppuccin",
+  --  priority = 1000, -- Ensures it loads first
+  --  config = function()
+  --    require("catppuccin").setup({
+  --      flavour = "mocha",
+  --      transparent_background = true,
+  --      integrations = {
+  --        cmp = true,
+  --        gitsigns = true,
+  --        indent_blankline = { enabled = true },
+  --        nvimtree = true,
+  --        telescope = true,
+  --        treesitter = true,
+  --        which_key = true,
+  --      },
+  --      styles = {
+  --        comments = { "italic" },
+  --        conditionals = { "italic" },
+  --      },
+  --      custom_highlights = function(colors)
+  --        return {
+  --          NormalFloat = { bg = colors.base },                    -- popup background
+  --          FloatBorder = { fg = colors.surface2 },                -- border color
+  --          Pmenu = { bg = colors.mantle, fg = colors.text },      -- cmp menu
+  --          PmenuSel = { bg = colors.surface1, fg = colors.text }, -- selected item
+  --        }
+  --      end,
+  --    })
+  --    vim.cmd.colorscheme("catppuccin")
+  --  end,
+  --},
+
+  --{
+  --  "rebelot/kanagawa.nvim",
+  --  name = "kanagawa",
+  --  priority = 1000, -- Ensures it loads first
+  --  config = function()
+  --    require("kanagawa").setup({
+  --      compile = true,   -- Compiles code to byte code for faster startup
+  --      undercurl = true, -- Enable undercurls
+  --      commentStyle = { italic = true },
+  --      keywordStyle = { italic = true },
+  --      --transparent = true, -- Enables background transparency natively
+  --      theme = "dragon", -- Load the absolute darkest theme variant
+
+  --      -- Map custom float windows, borders, and autocomplete menus using semantic aliases
+  --      overrides = function(colors)
+  --        local theme = colors.theme
+  --        return {
+  --          NormalFloat = { bg = theme.ui.bg_p1 },
+  --          FloatBorder = { fg = theme.ui.bg_p2 },
+
+  --          -- Autocomplete/cmp window styling
+  --          Pmenu = { fg = theme.ui.fg, bg = theme.ui.bg_p1 },
+  --          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+  --          PmenuSbar = { bg = theme.ui.bg_m1 },
+  --          PmenuThumb = { bg = theme.ui.bg_p2 },
+  --        }
+  --      end,
+  --    })
+
+  --    -- Set the specific darkest variant as your primary active theme
+  --    vim.cmd.colorscheme("kanagawa-dragon")
+  --  end,
+  --},
+
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "kepano/flexoki-neovim",
+    name = "flexoki",
     priority = 1000, -- Ensures it loads first
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = true,
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          indent_blankline = { enabled = true },
-          nvimtree = true,
-          telescope = true,
-          treesitter = true,
-          which_key = true,
-        },
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-        },
-        custom_highlights = function(colors)
-          return {
-            NormalFloat = { bg = colors.base },                    -- popup background
-            FloatBorder = { fg = colors.surface2 },                -- border color
-            Pmenu = { bg = colors.mantle, fg = colors.text },      -- cmp menu
-            PmenuSel = { bg = colors.surface1, fg = colors.text }, -- selected item
-          }
-        end,
-      })
-      vim.cmd.colorscheme("catppuccin")
+      -- Enable transparency natively through Flexoki
+      vim.g.flexoki_transparent = true
+
+      -- Apply the dark theme
+      vim.cmd.colorscheme("flexoki-dark")
     end,
   },
 
