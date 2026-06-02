@@ -1,59 +1,130 @@
--- Keymap example: map space to leader key
+-- ========================================================================== --
+--                                 SETTINGS                                   --
+-- ========================================================================== --
+
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Bootstrap lazy.nvim if not installed
-local lazypath = vim.fn.stdpath("config") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  print("Cloning lazy.nvim...")
-  vim.fn.system({
-    "git", "clone", "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
+-- Interface and numbers
+vim.opt.number = true         -- Show line numbers
+vim.opt.relativenumber = true -- Show relative line numbers
+vim.opt.scrolloff = 8         -- Keep 8 lines above/below cursor
+vim.opt.sidescrolloff = 8     -- Keep 8 columns left/right of cursor
+vim.opt.termguicolors = true  -- Enable 24-bit RGB colors
+
+-- Tabs and indentation
+vim.opt.expandtab = true   -- Use spaces instead of tabs
+vim.opt.shiftwidth = 2     -- Shift 2 spaces when tab
+vim.opt.tabstop = 2        -- 1 tab == 2 spaces
+vim.opt.smartindent = true -- Autoindent new lines
+
+-- Line wrapping
+vim.opt.wrap = true        -- Wrap long lines
+vim.opt.linebreak = true   -- Wrap at word boundaries
+vim.opt.breakindent = true -- Indent wrapped lines
+
+-- ========================================================================== --
+--                                 KEYMAPS                                    --
+-- ========================================================================== --
+
+-- General Keymaps
+vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Save file" })
+vim.keymap.set('i', 'nml', '<Esc>', { desc = "Exit insert mode" })
+
+-- -------------------------------------------------------------------------- --
+-- Mouse & Arrow Keys Hardcore Toggle                                         --
+-- -------------------------------------------------------------------------- --
+
+-- Disable mouse and arrows on startup
+vim.opt.mouse = ""
+local arrows = { "<Up>", "<Down>", "<Left>", "<Right>" }
+local modes = { "n", "i", "v" }
+
+for _, mode in ipairs(modes) do
+  for _, arrow in ipairs(arrows) do
+    vim.keymap.set(mode, arrow, "<Nop>", { silent = true })
+  end
 end
-vim.opt.rtp:prepend(lazypath)
 
--- Use lazy.nvim to manage plugins
-require("lazy").setup("plugins", {
-  concurrency = 5
-})
+-- State tracker and toggle function
+local hardcore_mode = true
 
--- Set GB English spell checking for .txt, .md, and .tex files
-vim.api.nvim_create_autocmd("FileType", {
+vim.keymap.set("n", "<leader>tm", function()
+  hardcore_mode = not hardcore_mode
+
+  if hardcore_mode then
+    vim.opt.mouse = ""
+    for _, mode in ipairs(modes) do
+      for _, arrow in ipairs(arrows) do
+        vim.keymap.set(mode, arrow, "<Nop>", { silent = true })
+      end
+    end
+    vim.notify("Hardcore mode enabled: Mouse & Arrows DISABLED", vim.log.levels.WARN)
+  else
+    vim.opt.mouse = "a" -- re-enable mouse in all modes
+    for _, mode in ipairs(modes) do
+      for _, arrow in ipairs(arrows) do
+        pcall(vim.keymap.del, mode, arrow) -- safely delete the block
+      end
+    end
+    vim.notify("Casual mode enabled: Mouse & Arrows ENABLED", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle Mouse/Arrow Keys" })
+
+-- ========================================================================== --
+--                               AUTOCMDS                                     --
+-- ========================================================================== --
+
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+-- Spell checking for text-based filetypes
+autocmd("FileType", {
+  group = augroup("SpellCheck", { clear = true }),
   pattern = { "txt", "md", "tex" },
   callback = function()
-    vim.opt.spell = true
-    vim.opt.spelllang = "en_gb"
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "en_gb"
   end,
 })
 
-vim.opt.number = true         -- show line numbers
-vim.opt.relativenumber = true -- show relative line numbers
-vim.opt.expandtab = true      -- use spaces instead of tabs
-vim.opt.shiftwidth = 2        -- shift 2 spaces when tab
-vim.opt.tabstop = 2           -- 1 tab == 2 spaces
-vim.opt.smartindent = true    -- autoindent new lines
-vim.opt.wrap = true           -- wrap long lines
-vim.opt.linebreak = true      -- wrap at word boundaries
-vim.opt.breakindent = true    -- indent wrapped lines
-vim.opt.scrolloff = 8         -- keep 8 lines above/below cursor
-vim.opt.sidescrolloff = 8     -- keep 8 columns left/right of cursor
+-- LSP-only keymaps (only map these when an LSP actually attaches to a buffer)
+autocmd("LspAttach", {
+  group = augroup("UserLspConfig", { clear = true }),
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
 
-vim.o.termguicolors = true -- enable 24-bit RGB colors
-vim.cmd([[
-  highlight Normal guibg=NONE guifg=NONE
-  highlight NonText guibg=NONE guifg=NONE
-]])
+    opts.desc = "LSP: Signature help"
+    vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
 
--- Keymap: save file with <leader>w
-vim.keymap.set('n', '<leader>w', ':w<CR>')
-vim.keymap.set('i', 'nml', '<Esc>', { desc = "nml to Escape" })
+    opts.desc = "LSP: Hover documentation"
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  end,
+})
 
--- See function signature in insert mode with Ctrl-k
-vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help" })
+-- ========================================================================== --
+--                            PLUGIN MANAGER                                  --
+-- ========================================================================== --
 
--- Hover to see documentation with K
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("config") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Set log level (commented out since deprecated)
---vim.lsp.set_log_level("error")
+-- Setup lazy.nvim to look inside lua/plugins/
+require("lazy").setup("plugins", {
+  concurrency = 5,
+  change_detection = { notify = false }, -- Stop popups when config changed
+})
