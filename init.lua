@@ -166,3 +166,11 @@ require("lazy").setup("plugins", {
   concurrency = 5,
   change_detection = { notify = false }, -- Stop popups when config changed
 })
+
+-- Load saved theme on startup
+require("config.theme").load_saved()
+
+-- Keymap to open picker
+vim.keymap.set("n", "<leader>tt", function()
+  require("config.theme").pick()
+end, { desc = "Theme Switcher" })
