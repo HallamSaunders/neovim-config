@@ -10,6 +10,11 @@
 - `C-k` (insert mode): view popup with information about current function (args, types, which arg currently typing, etc.).
 - `K` (normal mode): view popup for documentation (type definitions, etc.).
 
+## Theme Switching
+- `<leader>tt`: open a dialogue for picking a new theme.
+- `<leader>tn`: cycle to next theme.
+- `<leader>tp`: cycle to previous theme.
+
 ## Editor
 - (bufferline) `S-h`: previous buffer tab.
 - (bufferline) `S-l`: next buffer tab.

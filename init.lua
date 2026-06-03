@@ -1,7 +1,6 @@
 -- ========================================================================== --
---                                 SETTINGS                                   --
+--                                 SETTINGS                                   -- TODO: Debugging plugin, terminal integration plugin
 -- ========================================================================== --
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

@@ -25,6 +25,25 @@ return {
   },
 
   -- ======================================================================== --
+  -- COLOURIZER                                                                --
+  -- ======================================================================== --
+  {
+    "NvChad/nvim-colorizer.lua",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      user_default_options = {
+        RGB      = true,       -- #RGB hex codes
+        RRGGBB   = true,       -- #RRGGBB hex codes
+        names    = true,       -- "Blue" or "blue" colour names
+        RRGGBBAA = true,       -- #RRGGBBAA hex codes
+        css      = true,       -- Enable all CSS features
+        tailwind = true,       -- Tailwind colour classes
+        mode     = "background", -- "foreground", "background", or "virtualtext"
+      },
+    },
+  },
+
+  -- ======================================================================== --
   -- GIT INDICATION (Gitsigns)                                                --
   -- ======================================================================== --
   {

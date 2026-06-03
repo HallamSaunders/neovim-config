@@ -158,4 +158,78 @@ return {
       })
     end,
   },
+
+  -- ======================================================================== --
+  -- DASHBOARD                                                                 --
+  -- ======================================================================== --
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("dashboard").setup({
+        theme = "doom",
+        config = {
+          header = {
+            "",
+            "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗  ",
+            "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║  ",
+            "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║  ",
+            "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║  ",
+            "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║  ",
+            "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝  ",
+            "",
+          },
+          center = {
+            {
+              icon = "  ",
+              desc = "New File           ",
+              key = "n",
+              action = "enew",
+            },
+            {
+              icon = "  ",
+              desc = "Find File          ",
+              key = "f",
+              action = function() require("telescope.builtin").find_files() end,
+            },
+            {
+              icon = "  ",
+              desc = "Recent Files       ",
+              key = "r",
+              action = function() require("telescope.builtin").oldfiles() end,
+            },
+            {
+              icon = "  ",
+              desc = "Find Word          ",
+              key = "g",
+              action = function() require("telescope.builtin").live_grep() end,
+            },
+            {
+              icon = "  ",
+              desc = "Config             ",
+              key = "c",
+              action = "edit ~/.config/nvim/init.lua",
+            },
+            {
+              icon = "󰒲  ",
+              desc = "Lazy               ",
+              key = "l",
+              action = "Lazy",
+            },
+            {
+              icon = "  ",
+              desc = "Quit               ",
+              key = "q",
+              action = "qa",
+            },
+          },
+          footer = function()
+            local stats = require("lazy").stats()
+            return { "⚡ " .. stats.count .. " plugins loaded" }
+          end,
+        },
+      })
+    end,
+  },
 }

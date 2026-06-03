@@ -10,17 +10,16 @@ return {
     opts = {
       keymap = {
         preset = "default",
-        -- '<C-space>' to invoke completion
-        -- '<CR>' (Enter) to accept completion if selected
-        -- '<Tab>' and '<S-Tab>' to navigate menu / jump snippets
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+        ["<CR>"] = { "accept", "fallback" },
       },
 
-      -- Built-in sources
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
       },
 
-      -- Built-in completion documentation and signatures
       completion = {
         menu = { border = "rounded" },
         documentation = { auto_show = true, window = { border = "rounded" } },
@@ -28,6 +27,11 @@ return {
 
       signature = { enabled = true, window = { border = "rounded" } },
     },
+  },
+
+  {
+    "rafamadriz/friendly-snippets",
+    lazy = false,
   },
 
   -- ======================================================================== --
@@ -57,5 +61,22 @@ return {
     branch = "master",
     -- Load at startup since it maps global keys like Ctrl-N
     lazy = false,
+  },
+
+  -- ======================================================================== --
+  -- CURSOR WORD HIGHLIGHT                                                     --
+  -- ======================================================================== --
+  {
+    "RRethy/vim-illuminate",
+    event = { "BufReadPost", "BufNewFile" },
+    opts = {
+      delay = 100,
+      large_file_cutoff = 2000,
+      providers = { "lsp", "treesitter", "regex" },
+      filetypes_denylist = { "NvimTree", "oil", "trouble", "lazy", "mason", "help", "dashboard" },
+    },
+    config = function(_, opts)
+      require("illuminate").configure(opts)
+    end,
   },
 }
