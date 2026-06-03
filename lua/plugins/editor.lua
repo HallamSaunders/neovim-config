@@ -35,9 +35,7 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "<leader>de", "<cmd>NvimTreeToggle<CR>", desc = "Toggle NvimTree" },
-    },
+    lazy = false,
     opts = {
       filters = { dotfiles = false },
       view = {
@@ -48,6 +46,8 @@ return {
     config = function(_, opts)
       require("nvim-tree").setup(opts)
 
+      vim.keymap.set("n", "<leader>de", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+
       -- Disable side scrolling specific to the explorer window
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "NvimTree",
@@ -55,6 +55,35 @@ return {
           vim.opt_local.wrap = false
           vim.opt_local.sidescroll = 0
           vim.opt_local.sidescrolloff = 0
+        end,
+      })
+
+      -- Auto-open on startup
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function(data)
+          -- Let Oil handle directories
+          if data.file == "" or vim.fn.isdirectory(data.file) == 1 then return end
+          if vim.bo[data.buf].filetype == "oil" then return end
+          if data.file:match("^oil://") then return end
+
+          local filetype = vim.bo[data.buf].filetype
+          local ignored_filetypes = { "gitcommit", "gitrebase" }
+          if vim.tbl_contains(ignored_filetypes, filetype) then return end
+
+          require("nvim-tree.api").tree.open()
+        end,
+      })
+
+      -- Auto-open after being passed off from Oil (i.e: "nvim .")
+      vim.api.nvim_create_autocmd("BufLeave", {
+        pattern = "oil://*",
+        callback = function()
+          vim.schedule(function()
+            local next = vim.api.nvim_buf_get_name(0)
+            if not next:match("^oil://") and vim.fn.filereadable(next) == 1 then
+              require("nvim-tree.api").tree.open()
+            end
+          end)
         end,
       })
     end,
@@ -66,13 +95,25 @@ return {
   {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    keys = {
-      { "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
-    },
-    opts = {
-      view_options = { show_hidden = true },
-    },
+    lazy = false, -- Ensure loads immediately
+    config = function()
+      require("oil").setup({
+        view_options = { show_hidden = true },
+      })
+
+      vim.keymap.set("n", "-", "<cmd>Oil<CR>", { desc = "Open parent directory" })
+    end,
   },
+  --{
+  --  "stevearc/oil.nvim",
+  --  dependencies = { "nvim-tree/nvim-web-devicons" },
+  --  keys = {
+  --    { "-", "<cmd>Oil<CR>", desc = "Open parent directory" },
+  --  },
+  --  opts = {
+  --    view_options = { show_hidden = true },
+  --  },
+  --},
 
   -- ======================================================================== --
   -- FUZZY FINDER (Telescope)                                                 --
@@ -92,7 +133,7 @@ return {
   -- ======================================================================== --
   {
     "folke/trouble.nvim",
-    cmd = "Trouble",
+    lazy = false,
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",                        desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",           desc = "Buffer Diagnostics (Trouble)" },
@@ -101,6 +142,20 @@ return {
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>",                            desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>",                             desc = "Quickfix List (Trouble)" },
     },
-    opts = {},
+    config = function()
+      require("trouble").setup({})
+
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local buf = args.buf
+          local ft = vim.bo[buf].filetype
+          local ignored = { "NvimTree", "oil", "trouble", "lazy", "mason", "help", "qf" }
+          if vim.tbl_contains(ignored, ft) then return end
+          if vim.api.nvim_buf_get_name(buf) == "" then return end
+
+          require("trouble").open({ mode = "symbols", focus = false })
+        end,
+      })
+    end,
   },
 }

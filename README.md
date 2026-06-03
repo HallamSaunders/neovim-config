@@ -2,7 +2,9 @@
 ## General
 - `<leader>w`: write buffer.
 - `nml`: exit insert mode.
-- `<leader>tm`: toggle "hardcode" mode (turn on/off mouse and arrow keys).
+- `<leader>th`: toggle "hardcode" mode (turn on/off mouse and arrow keys).
+- `<leader>ta`: toggles just arrow keys on/off.
+- `<leader>tm`: toggles just mouse on/off.
 
 ## Text Editing
 - `C-k` (insert mode): view popup with information about current function (args, types, which arg currently typing, etc.).

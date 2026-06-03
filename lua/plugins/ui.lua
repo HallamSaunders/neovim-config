@@ -71,17 +71,28 @@ return {
   --},
 
   {
-    "kepano/flexoki-neovim",
-    name = "flexoki",
-    priority = 1000, -- Ensures it loads first
+    'sainnhe/everforest',
+    lazy = false,
+    priority = 1000,
     config = function()
-      -- Enable transparency natively through Flexoki
-      vim.g.flexoki_transparent = true
-
-      -- Apply the dark theme
-      vim.cmd.colorscheme("flexoki-dark")
-    end,
+      vim.g.everforest_enable_italic = true
+      vim.g.everforest_background = 'hard'
+      vim.cmd.colorscheme('everforest')
+    end
   },
+
+  --{
+  --  "kepano/flexoki-neovim",
+  --  name = "flexoki",
+  --  priority = 1000, -- Ensures it loads first
+  --  config = function()
+  --    -- Enable transparency natively through Flexoki
+  --    vim.g.flexoki_transparent = true
+
+  --    -- Apply the dark theme
+  --    vim.cmd.colorscheme("flexoki-dark")
+  --  end,
+  --},
 
   -- ======================================================================== --
   -- STATUS LINE (Lualine)                                                    --
@@ -94,6 +105,7 @@ return {
       options = {
         section_separators = "",
         component_separators = "",
+        theme = 'everforest'
       },
     },
   },

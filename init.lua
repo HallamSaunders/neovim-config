@@ -34,42 +34,80 @@ vim.keymap.set('i', 'nml', '<Esc>', { desc = "Exit insert mode" })
 -- -------------------------------------------------------------------------- --
 -- Mouse & Arrow Keys Hardcore Toggle                                         --
 -- -------------------------------------------------------------------------- --
-
--- Disable mouse and arrows on startup
 vim.opt.mouse = ""
 local arrows = { "<Up>", "<Down>", "<Left>", "<Right>" }
 local modes = { "n", "i", "v" }
 
+-- Disable arrows on startup
 for _, mode in ipairs(modes) do
   for _, arrow in ipairs(arrows) do
     vim.keymap.set(mode, arrow, "<Nop>", { silent = true })
   end
 end
 
--- State tracker and toggle function
-local hardcore_mode = true
+-- State trackers
+local arrows_disabled = true
+local mouse_disabled = true
 
-vim.keymap.set("n", "<leader>tm", function()
-  hardcore_mode = not hardcore_mode
-
-  if hardcore_mode then
-    vim.opt.mouse = ""
-    for _, mode in ipairs(modes) do
-      for _, arrow in ipairs(arrows) do
-        vim.keymap.set(mode, arrow, "<Nop>", { silent = true })
-      end
+-- Helper functions
+local function disable_arrows()
+  for _, mode in ipairs(modes) do
+    for _, arrow in ipairs(arrows) do
+      vim.keymap.set(mode, arrow, "<Nop>", { silent = true })
     end
-    vim.notify("Hardcore mode enabled: Mouse & Arrows DISABLED", vim.log.levels.WARN)
-  else
-    vim.opt.mouse = "a" -- re-enable mouse in all modes
-    for _, mode in ipairs(modes) do
-      for _, arrow in ipairs(arrows) do
-        pcall(vim.keymap.del, mode, arrow) -- safely delete the block
-      end
-    end
-    vim.notify("Casual mode enabled: Mouse & Arrows ENABLED", vim.log.levels.INFO)
   end
-end, { desc = "Toggle Mouse/Arrow Keys" })
+end
+
+local function enable_arrows()
+  for _, mode in ipairs(modes) do
+    for _, arrow in ipairs(arrows) do
+      pcall(vim.keymap.del, mode, arrow)
+    end
+  end
+end
+
+-- Toggle arrow keys
+vim.keymap.set("n", "<leader>ta", function()
+  arrows_disabled = not arrows_disabled
+  if arrows_disabled then
+    disable_arrows()
+    vim.notify("Arrows DISABLED", vim.log.levels.WARN)
+  else
+    enable_arrows()
+    vim.notify("Arrows ENABLED", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle Arrow Keys" })
+
+-- Toggle mouse
+vim.keymap.set("n", "<leader>tm", function()
+  mouse_disabled = not mouse_disabled
+  if mouse_disabled then
+    vim.opt.mouse = ""
+    vim.notify("Mouse DISABLED", vim.log.levels.WARN)
+  else
+    vim.opt.mouse = "a"
+    vim.notify("Mouse ENABLED", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle Mouse" })
+
+-- Toggle hardcore mode (both at once)
+vim.keymap.set("n", "<leader>th", function()
+  -- If either is enabled, disable both; if both disabled, enable both
+  local any_enabled = not arrows_disabled or not mouse_disabled
+  if any_enabled then
+    arrows_disabled = true
+    mouse_disabled = true
+    disable_arrows()
+    vim.opt.mouse = ""
+    vim.notify("Hardcore mode ON: Mouse & Arrows DISABLED", vim.log.levels.WARN)
+  else
+    arrows_disabled = false
+    mouse_disabled = false
+    enable_arrows()
+    vim.opt.mouse = "a"
+    vim.notify("Hardcore mode OFF: Mouse & Arrows ENABLED", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle Hardcore Mode (Mouse & Arrows)" })
 
 -- ========================================================================== --
 --                               AUTOCMDS                                     --
