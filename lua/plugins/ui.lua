@@ -6,7 +6,7 @@ return {
   { "rebelot/kanagawa.nvim",  name = "kanagawa",   lazy = false,   priority = 1000 },
   { "sainnhe/everforest",     lazy = false,        priority = 1000 },
   { "EdenEast/nightfox.nvim", lazy = false,        priority = 1000 },
-  { "kepano/flexoki-neovim",  name = "flexoki",    lazy = false,   priority = 1000 },
+  { "folke/tokyonight.nvim",  lazy = false,        priority = 1000 },
 
   -- ======================================================================== --
   -- STATUS LINE (Lualine)                                                    --

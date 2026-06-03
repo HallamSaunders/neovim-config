@@ -1,16 +1,70 @@
 local M = {}
 
 M.themes = {
+  -- Catppuccin
   {
-    name = "Carbonfox",
+    name = "Catppuccin Mocha",
     apply = function()
-      vim.cmd("colorscheme carbonfox")
+      require("catppuccin").setup({ flavour = "mocha", transparent_background = false })
+      vim.cmd("colorscheme catppuccin-mocha")
     end,
   },
+  {
+    name = "Catppuccin Macchiato",
+    apply = function()
+      require("catppuccin").setup({ flavour = "macchiato", transparent_background = false })
+      vim.cmd("colorscheme catppuccin-macchiato")
+    end,
+  },
+  {
+    name = "Catppuccin Frappe",
+    apply = function()
+      require("catppuccin").setup({ flavour = "frappe", transparent_background = false })
+      vim.cmd("colorscheme catppuccin-frappe")
+    end,
+  },
+  {
+    name = "Catppuccin Latte",
+    apply = function()
+      require("catppuccin").setup({ flavour = "latte", transparent_background = false })
+      vim.cmd("colorscheme catppuccin-latte")
+    end,
+  },
+
+  -- Kanagawa
+  {
+    name = "Kanagawa Wave",
+    apply = function()
+      require("kanagawa").setup({ theme = "wave", transparent = false })
+      vim.cmd("colorscheme kanagawa-wave")
+    end,
+  },
+  {
+    name = "Kanagawa Dragon",
+    apply = function()
+      require("kanagawa").setup({ theme = "dragon", transparent = false })
+      vim.cmd("colorscheme kanagawa-dragon")
+    end,
+  },
+  {
+    name = "Kanagawa Lotus",
+    apply = function()
+      require("kanagawa").setup({ theme = "lotus", transparent = false })
+      vim.cmd("colorscheme kanagawa-lotus")
+    end,
+  },
+
+  -- Nightfox
   {
     name = "Nightfox",
     apply = function()
       vim.cmd("colorscheme nightfox")
+    end,
+  },
+  {
+    name = "Dayfox",
+    apply = function()
+      vim.cmd("colorscheme dayfox")
     end,
   },
   {
@@ -20,78 +74,112 @@ M.themes = {
     end,
   },
   {
-    name = "Catppuccin Mocha",
+    name = "Duskfox",
     apply = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        transparent_background = true,
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          indent_blankline = { enabled = true },
-          nvimtree = true,
-          telescope = true,
-          treesitter = true,
-          which_key = true,
-        },
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-        },
-        custom_highlights = function(colors)
-          return {
-            NormalFloat = { bg = colors.base },
-            FloatBorder = { fg = colors.surface2 },
-            Pmenu = { bg = colors.mantle, fg = colors.text },
-            PmenuSel = { bg = colors.surface1, fg = colors.text },
-          }
-        end,
-      })
-      vim.cmd("colorscheme catppuccin-mocha")
+      vim.cmd("colorscheme duskfox")
     end,
   },
   {
-    name = "Kanagawa Dragon",
+    name = "Nordfox",
     apply = function()
-      require("kanagawa").setup({
-        compile = true,
-        undercurl = true,
-        commentStyle = { italic = true },
-        keywordStyle = { italic = true },
-        theme = "dragon",
-        overrides = function(colors)
-          local theme = colors.theme
-          return {
-            NormalFloat = { bg = theme.ui.bg_p1 },
-            FloatBorder = { fg = theme.ui.bg_p2 },
-            Pmenu = { fg = theme.ui.fg, bg = theme.ui.bg_p1 },
-            PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
-            PmenuSbar = { bg = theme.ui.bg_m1 },
-            PmenuThumb = { bg = theme.ui.bg_p2 },
-          }
-        end,
-      })
-      vim.cmd("colorscheme kanagawa-dragon")
+      vim.cmd("colorscheme nordfox")
     end,
   },
   {
-    name = "Everforest",
+    name = "Terafox",
     apply = function()
-      vim.g.everforest_enable_italic = true
+      vim.cmd("colorscheme terafox")
+    end,
+  },
+  {
+    name = "Carbonfox",
+    apply = function()
+      vim.cmd("colorscheme carbonfox")
+    end,
+  },
+
+  -- Tokyo Night
+  {
+    name = "Tokyo Night",
+    apply = function()
+      require("tokyonight").setup({ style = "night", transparent = false })
+      vim.cmd("colorscheme tokyonight-night")
+    end,
+  },
+  {
+    name = "Tokyo Night Storm",
+    apply = function()
+      require("tokyonight").setup({ style = "storm", transparent = false })
+      vim.cmd("colorscheme tokyonight-storm")
+    end,
+  },
+  {
+    name = "Tokyo Night Moon",
+    apply = function()
+      require("tokyonight").setup({ style = "moon", transparent = false })
+      vim.cmd("colorscheme tokyonight-moon")
+    end,
+  },
+  {
+    name = "Tokyo Night Day",
+    apply = function()
+      require("tokyonight").setup({ style = "day", transparent = false })
+      vim.cmd("colorscheme tokyonight-day")
+    end,
+  },
+
+  -- Everforest
+  {
+    name = "Everforest Dark Hard",
+    apply = function()
       vim.g.everforest_background = "hard"
+      vim.o.background = "dark"
       vim.cmd("colorscheme everforest")
     end,
   },
   {
-    name = "Flexoki Dark",
+    name = "Everforest Dark Medium",
     apply = function()
-      vim.g.flexoki_transparent = true
-      vim.cmd("colorscheme flexoki-dark")
+      vim.g.everforest_background = "medium"
+      vim.o.background = "dark"
+      vim.cmd("colorscheme everforest")
+    end,
+  },
+  {
+    name = "Everforest Dark Soft",
+    apply = function()
+      vim.g.everforest_background = "soft"
+      vim.o.background = "dark"
+      vim.cmd("colorscheme everforest")
+    end,
+  },
+  {
+    name = "Everforest Light Hard",
+    apply = function()
+      vim.g.everforest_background = "hard"
+      vim.o.background = "light"
+      vim.cmd("colorscheme everforest")
+    end,
+  },
+  {
+    name = "Everforest Light Medium",
+    apply = function()
+      vim.g.everforest_background = "medium"
+      vim.o.background = "light"
+      vim.cmd("colorscheme everforest")
+    end,
+  },
+  {
+    name = "Everforest Light Soft",
+    apply = function()
+      vim.g.everforest_background = "soft"
+      vim.o.background = "light"
+      vim.cmd("colorscheme everforest")
     end,
   },
 }
 
--- Persistence file
+-- Persistence
 local state_file = vim.fn.stdpath("data") .. "/theme.txt"
 
 function M.save(name)
@@ -132,6 +220,40 @@ function M.pick()
       end
     end
   end)
+end
+
+function M.current_index()
+  local f = io.open(state_file, "r")
+  if f then
+    local name = f:read("*l")
+    f:close()
+    for i, t in ipairs(M.themes) do
+      if t.name == name then return i end
+    end
+  end
+  return 1
+end
+
+function M.next()
+  local idx = M.current_index()
+  local next_idx = (idx % #M.themes) + 1
+  local t = M.themes[next_idx]
+  vim.cmd("highlight clear")
+  vim.cmd("syntax reset")
+  t.apply()
+  M.save(t.name)
+  vim.notify("Theme: " .. t.name, vim.log.levels.INFO)
+end
+
+function M.prev()
+  local idx = M.current_index()
+  local prev_idx = ((idx - 2) % #M.themes) + 1
+  local t = M.themes[prev_idx]
+  vim.cmd("highlight clear")
+  vim.cmd("syntax reset")
+  t.apply()
+  M.save(t.name)
+  vim.notify("Theme: " .. t.name, vim.log.levels.INFO)
 end
 
 return M
