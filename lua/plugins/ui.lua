@@ -70,15 +70,24 @@ return {
   --  end,
   --},
 
+  --{
+  --  'sainnhe/everforest',
+  --  lazy = false,
+  --  priority = 1000,
+  --  config = function()
+  --    vim.g.everforest_enable_italic = true
+  --    vim.g.everforest_background = 'hard'
+  --    vim.cmd.colorscheme('everforest')
+  --  end
+  --},
+
   {
-    'sainnhe/everforest',
+    "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.g.everforest_enable_italic = true
-      vim.g.everforest_background = 'hard'
-      vim.cmd.colorscheme('everforest')
-    end
+      vim.cmd("colorscheme carbonfox")
+    end,
   },
 
   --{
@@ -105,7 +114,7 @@ return {
       options = {
         section_separators = "",
         component_separators = "",
-        theme = 'everforest'
+        --theme = 'everforest'
       },
     },
   },
