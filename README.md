@@ -55,6 +55,7 @@
 - **autopairs**: automatically pair up symbols when typing.
 - **surround**: edit characters surrounding pairs.
 - **vim-visual-multi**: visualise multiline cursors.
+- **friendly-snippets**: some extra snippets, which work alongside blink.
 
 ## Editor
 - **bufferline**: show a status line with buffers listed like tabs.
@@ -62,6 +63,7 @@
 - **oil**: allows for editing of directories.
 - **telescope**: fuzzy finding.
 - **trouble**: visualising symbols with outlines, and diagnostics.
+- **dashboard**: splash screen/dashboard with quick actions when launching Nvim.
 
 ## LSP
 - **lspconfig**, **mason**: ensure language servers installed.
@@ -70,8 +72,9 @@
 - **vimtex**: configure automatic Latex compilation and live viewing with Zathura.
 
 ## UI
-- `<colour schemes>`: self explanatory.
+- `<colour schemes>`: self explanatory, managed by a custom handler with custom commands (defined in `lua/config/theme.lua`.
 - **lualine**: adds a status line at the bottom with information about current mode, filetype, etc.
+- **colorizer**: a colouriser for filling in colours in text.
 - **gitsigns**: adds git status and current branch to lualine.
 - **indent-blankline**: adds indentation guides.
 - **render-markdown**: adds some highlighting for markdown files.
