@@ -46,16 +46,6 @@ return {
             Sdk = { IncludePrereleases = true },
           },
         },
-        hls = {
-          settings = {
-            haskell = {
-              checkProject = true,
-              formattingProvider = "ormolu",
-              cabalFormattingProvider = "cabalfmt",
-            },
-          },
-          cmd = { "haskell-language-server-wrapper", "--lsp" },
-        },
         ts_ls = {},
         marksman = {},
         bashls = {},
@@ -76,7 +66,9 @@ return {
 
       -- Unified Mason setup handler
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(opts.servers),
+        ensure_installed = vim.tbl_filter(function(k)
+          return k ~= "hls"
+        end, vim.tbl_keys(opts.servers)),
         handlers = {
           function(server_name)
             local server_opts = opts.servers[server_name] or {}
@@ -86,6 +78,22 @@ return {
           end,
         },
       })
+
+      -- Manually set up hls, since we defer to the locally installed version
+      vim.lsp.config('hls', {
+        cmd = { "haskell-language-server-wrapper", "--lsp" },
+        filetypes = { "haskell", "lhaskell" },
+        root_markers = { "stack.yaml", "cabal.project", "*.cabal", "package.yaml" },
+        capabilities = blink.get_lsp_capabilities(),
+        settings = {
+          haskell = {
+            checkProject = true,
+            formattingProvider = "ormolu",
+            cabalFormattingProvider = "cabalfmt",
+          },
+        },
+      })
+      vim.lsp.enable('hls')
 
       vim.o.updatetime = 250
 
