@@ -1,6 +1,6 @@
-![[fullscreen.png]]
-![[fullscreen-2.png]] 
-![[telescope.png]]
+![[images/fullscreen.png]]
+![[images/fullscreen-2.png]] 
+![[images/telescope.png]]
 # Custom Keybindings and Autocommands
 ## General
 - `<leader>w`: write buffer.
