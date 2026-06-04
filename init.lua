@@ -30,6 +30,12 @@ vim.opt.breakindent = true -- Indent wrapped lines
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = "Save file" })
 vim.keymap.set('i', 'nml', '<Esc>', { desc = "Exit insert mode" })
 
+-- Navigate windows using Ctrl + hjkl
+vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
+vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
+vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'Move to bottom window' })
+vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'Move to top window' })
+
 -- -------------------------------------------------------------------------- --
 -- Mouse & Arrow Keys Hardcore Toggle                                         --
 -- -------------------------------------------------------------------------- --

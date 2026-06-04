@@ -8,6 +8,10 @@
 - `<leader>th`: toggle "hardcode" mode (turn on/off mouse and arrow keys).
 - `<leader>ta`: toggles just arrow keys on/off.
 - `<leader>tm`: toggles just mouse on/off.
+- `C-h`: focus left window. 
+- `C-j`: focus below window. 
+- `C-k`: focus above window. 
+- `C-l`: focus right window. 
 
 ## Text Editing
 - `C-k` (insert mode): view popup with information about current function (args, types, which arg currently typing, etc.).
@@ -24,7 +28,7 @@
 - (bufferline) `<leader>bp`: pick a buffer tab.
 - (bufferline) `<leader>bc`: close a buffer tab.
 - (nvim-tree) `<leader>de`: toggle nvim tree.
-- (oil) `-`: open oil on current working directory.
+- (oil) `<leader>oo` (normal mode): open oil on current working directory.
 - (telescope) `<leader>ff`: fuzzy search through files.
 - (telescope) `<leader>fg`: live grep over files.
 - (todo) `]t`: jump to next TODO comment.
@@ -75,7 +79,7 @@
 - **vimtex**: configure automatic Latex compilation and live viewing with Zathura.
 
 ## UI
-- `<colour schemes>`: self explanatory, managed by a custom handler with custom commands (defined in `lua/config/theme.lua`.
+- `<colour schemes>`: self explanatory, managed by a custom handler with custom commands (defined in `lua/config/theme.lua`).
 - **lualine**: adds a status line at the bottom with information about current mode, filetype, etc.
 - **colorizer**: a colouriser for filling in colours in text.
 - **gitsigns**: adds git status and current branch to lualine.
