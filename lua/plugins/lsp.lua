@@ -88,6 +88,12 @@ return {
         settings = {
           haskell = {
             checkProject = true,
+            checkOnSave = true,
+            plugin = {
+              ghcide = {
+                diagnosticsOnFly = false,
+              }
+            },
             formattingProvider = "ormolu",
             cabalFormattingProvider = "cabalfmt",
           },
