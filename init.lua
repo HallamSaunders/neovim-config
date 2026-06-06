@@ -169,6 +169,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim to look inside lua/plugins/
 require("lazy").setup("plugins", {
   concurrency = 5,
+  git = {
+    timeout = 300,
+  },
   change_detection = { notify = false }, -- Stop popups when config changed
 })
 
