@@ -39,18 +39,18 @@ return {
             },
           },
         },
-        omnisharp = {
-          settings = {
-            FormattingOptions = { EnableEditorConfigSupport = true, OrganizeImports = true },
-            RoslynExtensionsOptions = { EnableAnalyzersSupport = true, EnableImportCompletion = true },
-            Sdk = { IncludePrereleases = true },
-          },
-        },
+        --omnisharp = {
+        --  settings = {
+        --    FormattingOptions = { EnableEditorConfigSupport = true, OrganizeImports = true },
+        --    RoslynExtensionsOptions = { EnableAnalyzersSupport = true, EnableImportCompletion = true },
+        --    Sdk = { IncludePrereleases = true },
+        --  },
+        --},
         ts_ls = {},
         marksman = {},
         bashls = {},
         yamlls = {},
-        gopls = {},
+        --gopls = {},
         texlab = {},
         svelte = {},
         html = {},
