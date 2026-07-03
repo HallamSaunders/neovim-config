@@ -101,6 +101,25 @@ M.themes = {
       hl("DiagnosticWarn", { fg = c.warning, bg = "NONE" })
       hl("DiagnosticInfo", { fg = c.info, bg = "NONE" })
       hl("DiagnosticHint", { fg = c.hint, bg = "NONE" })
+
+      -- ======================================================================== --
+      -- TROUBLE.NVIM TRANSPARENCY OVERRIDES                                      --
+      -- ======================================================================== --
+      hl("TroubleNormal", { bg = "NONE" })         -- Main Trouble window background
+      hl("TroubleNormalNC", { bg = "NONE" })       -- Trouble window when out of focus
+      hl("TroubleSignColumn", { bg = "NONE" })     -- Sidebar column for icons
+      hl("TroubleFoldIcon", { fg = c.primary, bg = "NONE" })
+      hl("TroubleText", { fg = c.fg, bg = "NONE" })
+
+      -- Trouble UI Elements & Borders
+      hl("TroubleBorder", { fg = c.border, bg = "NONE" })
+      hl("TroubleHeader", { fg = c.primary, bold = true, bg = "NONE" })
+      hl("TroubleLocation", { fg = c.fg_muted, bg = "NONE" })
+      hl("TroubleSource", { fg = c.tertiary, bg = "NONE" })
+      hl("TroubleCode", { fg = c.secondary, bg = "NONE" })
+
+      -- Keep the selected line slightly tinted so you can still see what you're highlighting
+      hl("TroubleSelected", { bg = c.selection })
     end,
   },
 
