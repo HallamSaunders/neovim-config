@@ -1,6 +1,109 @@
 local M = {}
 
 M.themes = {
+  -- Custom
+  {
+    name = "Matugen",
+    apply = function()
+      -- Try to load the compiled Matugen file safely
+      local status, matugen = pcall(require, "matugen-theme")
+      if not status then
+        vim.notify("Matugen colors not found! Generate them via CLI first.", vim.log.levels.WARN)
+        return
+      end
+
+      local c = matugen.colors
+      vim.o.termguicolors = true
+      vim.g.colors_name = "matugen"
+
+      local function hl(group, options)
+        vim.api.nvim_set_hl(0, group, options)
+      end
+
+      -- Essential UI Groups
+      hl("Normal", { fg = c.fg, bg = c.bg })
+      hl("NormalFloat", { fg = c.fg, bg = c.bg_subtle })
+      hl("CursorLine", { bg = c.bg_subtle })
+      hl("LineNr", { fg = c.fg_muted })
+      hl("CursorLineNr", { fg = c.primary, bold = true })
+      hl("WinSeparator", { fg = c.border })
+      hl("Visual", { bg = c.selection })
+      hl("Pmenu", { fg = c.fg, bg = c.bg_subtle })
+      hl("PmenuSel", { fg = c.bg, bg = c.primary, bold = true })
+
+      -- Code/Syntax Highlights
+      hl("Comment", { fg = c.fg_muted, italic = true })
+      hl("Constant", { fg = c.tertiary })
+      hl("String", { fg = c.secondary })
+      hl("Identifier", { fg = c.primary })
+      hl("Function", { fg = c.primary, bold = true })
+      hl("Statement", { fg = c.primary })
+      hl("Operator", { fg = c.fg })
+      hl("Type", { fg = c.primary })
+      hl("Special", { fg = c.secondary })
+
+      -- Diagnostics (LSP)
+      hl("DiagnosticError", { fg = c.error })
+      hl("DiagnosticWarn", { fg = c.warning })
+      hl("DiagnosticInfo", { fg = c.info })
+      hl("DiagnosticHint", { fg = c.hint })
+    end,
+  },
+  -- Matugen Transparent
+  {
+    name = "Matugen (Transparent)",
+    apply = function()
+      local status, matugen = pcall(require, "matugen-theme")
+      if not status then
+        vim.notify("Matugen colors not found!", vim.log.levels.WARN)
+        return
+      end
+
+      local c = matugen.colors
+      vim.o.termguicolors = true
+      vim.g.colors_name = "matugen"
+
+      local function hl(group, options)
+        vim.api.nvim_set_hl(0, group, options)
+      end
+
+      -- Clear out standard panel backgrounds for absolute terminal transparency
+      hl("Normal", { fg = c.fg, bg = "NONE" })
+      hl("SignColumn", { bg = "NONE" })
+      hl("FoldColumn", { bg = "NONE" })
+
+      -- Floating windows & popups look best with a slight, subtle tint over the blur
+      hl("NormalFloat", { fg = c.fg, bg = c.bg_subtle })
+      hl("FloatBorder", { fg = c.border, bg = c.bg_subtle })
+
+      -- UI Element highlights
+      hl("CursorLine", { bg = c.bg_subtle })
+      hl("LineNr", { fg = c.fg_muted, bg = "NONE" })
+      hl("CursorLineNr", { fg = c.primary, bold = true, bg = "NONE" })
+      hl("WinSeparator", { fg = c.border, bg = "NONE" })
+      hl("Visual", { bg = c.selection })
+      hl("Pmenu", { fg = c.fg, bg = c.bg_subtle })
+      hl("PmenuSel", { fg = c.bg, bg = c.primary, bold = true })
+
+      -- Code/Syntax Highlights
+      hl("Comment", { fg = c.fg_muted, italic = true })
+      hl("Constant", { fg = c.tertiary })
+      hl("String", { fg = c.secondary })
+      hl("Identifier", { fg = c.primary })
+      hl("Function", { fg = c.primary, bold = true })
+      hl("Statement", { fg = c.primary })
+      hl("Operator", { fg = c.fg })
+      hl("Type", { fg = c.primary })
+      hl("Special", { fg = c.secondary })
+
+      -- Diagnostics (LSP)
+      hl("DiagnosticError", { fg = c.error, bg = "NONE" })
+      hl("DiagnosticWarn", { fg = c.warning, bg = "NONE" })
+      hl("DiagnosticInfo", { fg = c.info, bg = "NONE" })
+      hl("DiagnosticHint", { fg = c.hint, bg = "NONE" })
+    end,
+  },
+
   -- Catppuccin
   {
     name = "Catppuccin Mocha",
