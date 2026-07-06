@@ -57,6 +57,7 @@ return {
         cssls = {},
         jsonls = {},
         clangd = {},
+        asm_lsp = {}
       },
     },
 
