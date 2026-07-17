@@ -2,26 +2,26 @@ local M = {}
 
 M.colors = {
   -- Core UI Backgrounds & Foregrounds
-  bg        = "#121318",
-  bg_subtle = "#1e1f25",
-  bg_deep   = "#0d0e13",
-  fg        = "#e3e2e9",
-  fg_muted  = "#c5c6d0",
+  bg        = "#0e1416",
+  bg_subtle = "#1b2122",
+  bg_deep   = "#090f10",
+  fg        = "#dee3e5",
+  fg_muted  = "#bfc8ca",
 
   -- Accent & Material Brand Tokens
-  primary   = "#b2c5ff",
-  secondary = "#c0c6dd",
-  tertiary  = "#e1bbdc",
+  primary   = "#82d3e2",
+  secondary = "#b1cbd1",
+  tertiary  = "#bbc5eb",
 
   -- Statuses / Diagnostics
   error     = "#ffb4ab",
   warning   = "#93000a",
-  info      = "#314578",
-  hint      = "#404659",
+  info      = "#004e59",
+  hint      = "#334b4f",
 
   -- Borders & Selections
-  border    = "#8f909a",
-  selection = "#45464f",
+  border    = "#899294",
+  selection = "#3f484a",
 }
 
 return M
