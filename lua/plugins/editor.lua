@@ -39,7 +39,7 @@ return {
     opts = {
       filters = { dotfiles = false },
       view = {
-        width = { min = 30, max = -1, padding = 1 },
+        width = { min = 30, max = 40, padding = 1 },
         preserve_window_proportions = true,
       },
     },
@@ -47,16 +47,6 @@ return {
       require("nvim-tree").setup(opts)
 
       vim.keymap.set("n", "<leader>de", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
-
-      -- Disable side scrolling specific to the explorer window
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "NvimTree",
-        callback = function()
-          vim.opt_local.wrap = false
-          vim.opt_local.sidescroll = 0
-          vim.opt_local.sidescrolloff = 0
-        end,
-      })
 
       -- Auto-open on startup
       vim.api.nvim_create_autocmd("VimEnter", {
