@@ -50,7 +50,7 @@ return {
         marksman = {},
         bashls = {},
         yamlls = {},
-        gopls = {},
+        --gopls = {},
         texlab = {},
         svelte = {},
         html = {},
