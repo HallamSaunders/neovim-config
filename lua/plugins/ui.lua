@@ -25,19 +25,38 @@ return {
   },
 
   -- ======================================================================== --
-  -- COLOURIZER                                                                --
+  -- TREESITTER                                                               --
+  -- ======================================================================== --
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    build = ":TSUpdate",
+    event = { "BufReadPre", "BufNewFile" },
+    main = "nvim-treesitter.configs",
+    opts = {
+      ensure_installed = { "lua", "vim", "vimdoc", "python", "rust", "c_sharp",
+        "haskell", "javascript", "typescript", "tsx", "svelte", "html", "css",
+        "json", "yaml", "bash", "markdown", "markdown_inline", "sql", "regex" },
+      auto_install = true,
+      highlight = { enable = true },
+      indent = { enable = true },
+    },
+  },
+
+  -- ======================================================================== --
+  -- COLOURIZER                                                               --
   -- ======================================================================== --
   {
     "NvChad/nvim-colorizer.lua",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       user_default_options = {
-        RGB      = true,       -- #RGB hex codes
-        RRGGBB   = true,       -- #RRGGBB hex codes
-        names    = true,       -- "Blue" or "blue" colour names
-        RRGGBBAA = true,       -- #RRGGBBAA hex codes
-        css      = true,       -- Enable all CSS features
-        tailwind = true,       -- Tailwind colour classes
+        RGB      = true,         -- #RGB hex codes
+        RRGGBB   = true,         -- #RRGGBB hex codes
+        names    = true,         -- "Blue" or "blue" colour names
+        RRGGBBAA = true,         -- #RRGGBBAA hex codes
+        css      = true,         -- Enable all CSS features
+        tailwind = true,         -- Tailwind colour classes
         mode     = "background", -- "foreground", "background", or "virtualtext"
       },
     },

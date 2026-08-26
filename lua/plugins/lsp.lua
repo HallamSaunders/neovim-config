@@ -52,12 +52,32 @@ return {
         yamlls = {},
         --gopls = {},
         texlab = {},
-        svelte = {},
+        svelte = {
+          capabilities = {
+            workspace = {
+              didChangeWatchedFiles = {
+                dynamicRegistration = true,
+              },
+            },
+          },
+          on_attach = function(client, bufnr)
+            -- Trigger auto-imports on save/type if using svelte-language-server
+            vim.api.nvim_create_autocmd("BufWritePost", {
+              pattern = { "*.js", "*.ts" },
+              callback = function()
+                client.notify("$/onDidChangeTsOrJsFile", { uri = vim.uri_from_bufnr(bufnr) })
+              end,
+            })
+          end,
+        },
         html = {},
         cssls = {},
         jsonls = {},
         clangd = {},
         sqls = {},
+        emmet_ls = {
+          filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+        },
       },
     },
 
