@@ -29,18 +29,27 @@ return {
   -- ======================================================================== --
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    lazy = false, -- the plugin explicitly doesn't support lazy-loading
     build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
-    main = "nvim-treesitter.configs",
-    opts = {
-      ensure_installed = { "lua", "vim", "vimdoc", "python", "rust", "c_sharp",
-        "haskell", "javascript", "typescript", "tsx", "svelte", "html", "css",
-        "json", "yaml", "bash", "markdown", "markdown_inline", "sql", "regex" },
-      auto_install = true,
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
+    config = function()
+      local parsers = {
+        "svelte", "rust", "haskell", "python", "lua",
+        "html", "css", "javascript", "typescript",
+        "markdown", "markdown_inline", "json", "yaml",
+        "bash", "c", "cpp", "sql", "latex",
+      }
+      require("nvim-treesitter").install(parsers)
+
+      -- filetype names don't always match parser names (bash -> sh, latex -> tex)
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = {
+          "svelte", "rust", "haskell", "python", "lua",
+          "html", "css", "javascript", "typescript",
+          "markdown", "json", "yaml", "sh", "c", "cpp", "sql", "tex",
+        },
+        callback = function() vim.treesitter.start() end,
+      })
+    end,
   },
 
   -- ======================================================================== --
